@@ -14,7 +14,8 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: dodgerblue;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+  background-blend-mode: multiply,multiply;
 }
 
 .App {
@@ -26,24 +27,35 @@ body {
   padding: 1rem 0.5rem;
 }
 
-section {
-  width: 100%;
-  max-width: 420px;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0,0,0,0.4);
+.main{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  height:100%;
+  width:100%;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  padding-bottom: 1rem;
-}
+
+/*section {*/
+/*  width: 100%;*/
+/*  max-width: 420px;*/
+/*  min-height: 400px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: flex-start;*/
+/*  padding: 1rem;*/
+/*  background-color: rgb(10, 25, 41);*/
+/*}*/
+
+/*form {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: space-evenly;*/
+/*  flex-grow: 1;*/
+/*  padding-bottom: 1rem;*/
+/*}*/
 
 a, a:visited {
   color: #fff;
@@ -52,16 +64,16 @@ a, a:visited {
 input[type="text"],
 input[type="password"],
 button,
-textarea {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-}
+/*textarea {*/
+/*  font-family: 'Nunito', sans-serif;*/
+/*  font-size: 22px;*/
+/*  padding: 0.25rem;*/
+/*  border-radius: 0.5rem;*/
+/*}*/
 
 label,
 button {
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
 
 button {
