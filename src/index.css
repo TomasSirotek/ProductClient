@@ -18,14 +18,14 @@ body {
   background-blend-mode: multiply,multiply;
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem 0.5rem;
-}
+/*.App {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  min-height: 100vh;*/
+/*  padding: 1rem 0.5rem;*/
+/*}*/
 
 .main{
   position:absolute;
@@ -115,7 +115,7 @@ button {
 
 .errmsg {
   background-color: lightpink;
-  color: firebrick;
+  color: firebrick; 
   font-weight: bold;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
