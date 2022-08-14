@@ -1,20 +1,33 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+
+import ReactDOM from 'react-dom/client';
 import './index.css';
+import App from './App';
+import * as React from "react";
+import {AuthProvider} from './context/AuthProvider';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
-
-const container = document.getElementById('root');
-const root = createRoot(container);
-
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
-);
+    <React.StrictMode>
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/*" element={<App/>}/>
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+
+        {/* <BrowserRouter>
+            <div>
+                <h1>Hello, React Router!</h1>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
+            </div>
+        </BrowserRouter> */}
+    </React.StrictMode>
+)
+
+
 
 
