@@ -79,9 +79,7 @@ const Home = () => {
             <br />
             <p>You are logged in!</p>
             
-          
-           
-
+        
             <Link to="/admin">Go to the Admin page</Link>
 
             <Link to="/dashboard">Go to dashboard</Link>
