@@ -37,9 +37,9 @@ function App() {
                   <Route path="admin" element={<Admin />} />
               </Route>
 
-              {/*<Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>*/}
-              {/*    <Route path="lounge" element={<Lounge />} />*/}
-              {/*</Route>*/}
+              <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Administrator]} />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+              </Route>
 
               {/* catch all */}
               <Route path="*" element={<Missing />} />
