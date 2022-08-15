@@ -54,6 +54,13 @@ body {
   margin: 60px auto;
 }
 
+.paperStyle3 {
+  padding: .5%;
+  height: 65vh;
+  width: 90%;
+  margin: 30px auto;
+}
+
 .line {
   display: inline-block;
 }

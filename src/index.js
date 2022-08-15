@@ -17,14 +17,6 @@ root.render(
             </AuthProvider>
         </BrowserRouter>
 
-        {/* <BrowserRouter>
-            <div>
-                <h1>Hello, React Router!</h1>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                </Routes>
-            </div>
-        </BrowserRouter> */}
     </React.StrictMode>
 )
 
