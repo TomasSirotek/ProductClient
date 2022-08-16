@@ -23,7 +23,7 @@ function Employees() {
       <Grid >
                         <Paper elevation={12}  className="paperStyle3">
   <Table
-   rows={newRows}
+   Rows={newRows}
   />
                  
                         </Paper>

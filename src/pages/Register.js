@@ -3,10 +3,11 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios.js';
 import {Alert, Avatar, Button, Grid, Paper, Snackbar, Stack, TextField} from "@mui/material";
+import {Link} from 'react-router-dom';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}$/;
+// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{6,24}$/;
 const REGISTER_URL = '/Auth/register';
 
 const Register = () => {
@@ -42,7 +43,8 @@ const Register = () => {
 
 
     useEffect(() => {
-        const result = PWD_REGEX.test(password);
+       // const result = PWD_REGEX.test(password);
+       const result = password;
         console.log(result);
         console.log(password);
         setValidPwd(result);
@@ -62,13 +64,13 @@ const Register = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
-         const v1 = EMAIL_REGEX.test(email);
-         const v2 = PWD_REGEX.test(password);
-         if (!v1 || !v2 ) {
-             setErrMsg("Invalid Entry");
-             return;
-         }
+    //     // if button enabled with JS hack
+    //      const v1 = EMAIL_REGEX.test(email);
+    //    //  const v2 = PWD_REGEX.test(password);
+    //      if (!v1 || !v2 ) {
+    //          setErrMsg("Invalid Entry");
+    //          return;
+    //      }
         try {
             const response = await axios.post(REGISTER_URL,
                 JSON.stringify({ firstName,lastName,email,password }),
@@ -218,7 +220,7 @@ const Register = () => {
                                 Already registered?<br />
                                 <span className="line">
                             {/*put router link here*/}
-                                    <a href="#">Sign In</a>
+                            <Link to="/login">Sign In</Link>
                         </span>
                             </p>
                         </Paper>

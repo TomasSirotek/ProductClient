@@ -3,6 +3,7 @@ import axios from '../../api/axios.js';
 import {Alert, Avatar, Button, Grid, Paper, Snackbar, TextField} from "@mui/material";
 import AuthContext from "../../context/AuthProvider";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
+
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const AUTH_URL = '/Auth';
 
