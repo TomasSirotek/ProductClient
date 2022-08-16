@@ -7,6 +7,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from '../api/axios.js';
 import { DataGrid } from '@mui/x-data-grid';
+import useRefreshToken from "../hooks/useRefreshToken";
 
 
 
@@ -17,6 +18,9 @@ const Employees = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // test 
+  const refresh = useRefreshToken();
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 300},
@@ -101,6 +105,7 @@ const Employees = () => {
           ) : (
             <p>No users available !</p>
           )}
+          <button onClick={() => refresh()}>Refresh</button>
         </Paper>
       </Grid>
     </div>

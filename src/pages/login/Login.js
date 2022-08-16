@@ -30,8 +30,6 @@ const Login = () => {
     
     useEffect(() => {
         const result = EMAIL_REGEX.test(email);
-        console.log(result);
-        console.log(email);
         setValidEmail(result);
     },[email])
 
@@ -56,7 +54,8 @@ const Login = () => {
                 }
             );
             const token = response?.data?.token;
-            const roles = response?.data?.roles; 
+            const roles = response?.data?.roles.map(x => x.name); 
+            console.log('User is in roles  =>' + roles)
             setAuth({email,password,roles,token})
             
             console.log(response?.data);

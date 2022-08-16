@@ -10,11 +10,12 @@ import Missing from "./pages/Missing";
 import Admin from "./pages/Admin";
 import Employees from "./pages/Employees";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 
 const ROLES = {
-    'User' : "User",
-    'Administrator' : "Administrator"
+    'User' : 'User',
+    'Administrator' : 'Administrator'
 }
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
               <Route path="unauthorized" element={<Unauthorized />} />
 
               {/* we want to protect these routes */}
-              <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Administrator]}/>}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.User]}/>}>
                   <Route path="/" element={<Home />} />
               </Route>
               
@@ -35,7 +36,7 @@ function App() {
                   <Route path="admin" element={<Admin />} />
               </Route>
 
-              <Route element={<RequireAuth allowedRoles={[ROLES.User,ROLES.Administrator]} />}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]} />}>
                   <Route path="employees" element={<Employees />} />
               </Route>
 
