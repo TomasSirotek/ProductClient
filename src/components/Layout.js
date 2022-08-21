@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom"
-import Drawer from "./Drawer"
+
+import Navbar from "./Navbar"
 
 const Layout = () => {
     return (
         // space for navbar => 
         <main className="App">
-            <Drawer/>
+            <Navbar/>
             <Outlet />
+    
         </main>
 
     )

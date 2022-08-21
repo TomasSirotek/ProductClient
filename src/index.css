@@ -14,8 +14,9 @@ html {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
- background-blend-mode: multiply,multiply;
+  background:#51557E;
+  /* background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+ background-blend-mode: multiply,multiply; */
   /* background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); */
   /* background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%); */
  
@@ -64,10 +65,18 @@ body {
   margin: 30px auto;
 }
 
+.paperStyle4{
+  padding: 1%;
+  height: 80vh;
+  width: 60%;
+  margin: 5% auto;
+}
+
 .line {
   display: inline-block;
 }
 .beforeLine {
   margin-top:5%;
   font-size: 18px;
+  text-align: center;
 }

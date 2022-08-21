@@ -8,9 +8,10 @@ import Unauthorized from "./pages/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
 import Missing from "./pages/Missing";
 import Admin from "./pages/Admin";
-import Employees from "./pages/Employees";
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
+import Users from "./pages/users/Users"
+import EditUser from "./pages/users/edit/EditUser"
+import PersistLogin from './components/PersistLogin';
 
 
 const ROLES = {
@@ -22,13 +23,14 @@ function App() {
   return (
       <Routes>
               {/* public routes */}
+          <Route path="login" element={<Login />} />
           <Route path="/" element={<Layout />}>
-              <Route path="login" element={<Login />} />
+             
               <Route path="register" element={<Register />} />
               <Route path="unauthorized" element={<Unauthorized />} />
-
+            <Route element={<PersistLogin/>}>
               {/* we want to protect these routes */}
-              <Route element={<RequireAuth allowedRoles={[ROLES.User]}/>}>
+              <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]}/>}>
                   <Route path="/" element={<Home />} />
               </Route>
               
@@ -37,9 +39,14 @@ function App() {
               </Route>
 
               <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]} />}>
-                  <Route path="employees" element={<Employees />} />
+                  <Route path="users" element={<Users />} />
               </Route>
 
+              <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]} />}>
+                  <Route path="users/:id" element={<EditUser />} />
+              </Route>
+
+            </Route>
               {/* catch all */}
               <Route path="*" element={<Missing />} />
           </Route>

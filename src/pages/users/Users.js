@@ -1,27 +1,35 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import DefaultTable from "../components/DefaultTable";
+import DefaultTable from "../../components/DefaultTable";
 import { Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from '../api/axios.js';
+import axios from '../../api/axios.js';
 import { DataGrid } from '@mui/x-data-grid';
-import useRefreshToken from "../hooks/useRefreshToken";
-
+import useRefreshToken from "../../hooks/useRefreshToken";
+import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 
 
 
 const USER_URL = '/User';  
-const Employees = () => {
+const Users = () => {
+  const [isLoading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [message, setMessage] = useState('');
   // test 
   const refresh = useRefreshToken();
+  
 
+  const handleRowClick = (params) => {
+    const from = location.state?.from?.pathname || `/users/${params.row.id}`;
+    navigate(from, { replace: true });
+
+  };
   const columns = [
     { field: 'id', headerName: 'ID', width: 300},
     {
@@ -74,9 +82,11 @@ const Employees = () => {
             console.log(response.data);
             isMounted && setUsers(response.data);
         } catch (err) {
-            console.error(err);
-         //   navigate('/', { state: { from: location }, replace: true });
+       // navigate('/', { state: { from: location }, replace: true });
+        } finally{
+          setLoading(false);
         }
+        
     }
 
     getUsers();
@@ -88,28 +98,38 @@ const Employees = () => {
 }, [])
 
   return (
-    <div>
-      <h2>Users page</h2>
-      <Link to="/">Back home</Link>
-      <Grid>
-        <Paper elevation={12} className="paperStyle3">
-          {users?.length ? (
-           <div style={{ height: 500, width: '100%' }}>
-           <DataGrid
-             rows={users}
-             columns={columns}
-             pageSize={5}
-             rowsPerPageOptions={[5]}
-           />
-         </div>
-          ) : (
-            <p>No users available !</p>
-          )}
-          <button onClick={() => refresh()}>Refresh</button>
-        </Paper>
-      </Grid>
-    </div>
+    <>
+    {isLoading
+        ? <p>Loading users</p>
+        :  <div>
+        
+        <h2>Users page</h2>
+        
+    
+        <Grid>
+          <Paper elevation={12} className="paperStyle3">
+          {message && <Alert severity="info">{message}</Alert>}
+
+            {users?.length ? (
+             <div style={{ height: 500, width: '100%' }}>
+             <DataGrid
+               rows={users}
+               columns={columns}
+               pageSize={5}
+               rowsPerPageOptions={[5]}
+               onRowClick={handleRowClick} {...users}
+             />
+           </div>
+            ) : (
+              <p>No users available !</p>
+            )}
+            <button onClick={() => refresh()}>Refresh</button>
+          </Paper>
+        </Grid>
+      </div>}
+</>
+   
   );
 };
 
-export default Employees;
+export default Users;
