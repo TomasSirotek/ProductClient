@@ -15,7 +15,13 @@ const Home = () => {
 
 
     return (
+        
         <section>
+             <header className="bg-white shadow">
+                <div className="max-w-7xl mx-auto flex py-4  ">
+                    <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+                </div>
+            </header>
             <h1>Home</h1>
             <br />
             <p>You are logged in!</p>

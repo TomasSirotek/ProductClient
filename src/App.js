@@ -11,6 +11,7 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import Users from "./pages/users/Users"
 import EditUser from "./pages/users/edit/EditUser"
+import AddUser from "./pages/AddUser"
 import PersistLogin from './components/PersistLogin';
 
 
@@ -24,12 +25,12 @@ function App() {
       <Routes>
               {/* public routes */}
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+
           <Route path="/" element={<Layout />}>
              
-              <Route path="register" element={<Register />} />
               <Route path="unauthorized" element={<Unauthorized />} />
             <Route element={<PersistLogin/>}>
-              {/* we want to protect these routes */}
               <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]}/>}>
                   <Route path="/" element={<Home />} />
               </Route>
@@ -44,6 +45,10 @@ function App() {
 
               <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]} />}>
                   <Route path="users/:id" element={<EditUser />} />
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles={[ROLES.Administrator]}/>}>
+                  <Route path="/addUser" element={<AddUser />} />
               </Route>
 
             </Route>

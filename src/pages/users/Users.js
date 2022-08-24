@@ -1,19 +1,20 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import DefaultTable from "../../components/DefaultTable";
+import { useState, useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import axios from '../../api/axios.js';
 import { DataGrid } from '@mui/x-data-grid';
 import useRefreshToken from "../../hooks/useRefreshToken";
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
 
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
-
-const USER_URL = '/User';  
+const USER_URL = '/User';
 const Users = () => {
   const [isLoading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
@@ -23,7 +24,7 @@ const Users = () => {
   const [message, setMessage] = useState('');
   // test 
   const refresh = useRefreshToken();
-  
+
 
   const handleRowClick = (params) => {
     const from = location.state?.from?.pathname || `/users/${params.row.id}`;
@@ -31,11 +32,11 @@ const Users = () => {
 
   };
   const columns = [
-    { field: 'id', headerName: 'ID', width: 300},
+    { field: 'id', headerName: 'ID', width: 300 },
     {
       field: 'email',
       headerName: 'Email',
-      width: 250,
+      width: 200,
     },
     {
       field: 'fullName',
@@ -51,22 +52,22 @@ const Users = () => {
       headerName: 'Roles',
       width: 200,
       valueGetter: (params) =>
-      `${params.row.roles.map(x => x.name) || 'No roles'}`,
+        `${params.row.roles.map(x => x.name) || 'No roles'}`,
     },
     {
       field: 'isActivated',
       headerName: 'Active',
       width: 100,
-      type:'boolean',
+      type: 'boolean',
     },
     {
       field: 'createdAt',
       headerName: 'Created',
-      width: 250,
-      type:'dateTime',
+      width: 230,
+      type: 'dateTime',
       valueGetter: ({ value }) => value && new Date(value),
     },
-   
+
   ];
 
 
@@ -75,60 +76,62 @@ const Users = () => {
     const controller = new AbortController();
 
     const getUsers = async () => {
-        try {
-            const response = await axiosPrivate.get(USER_URL, {
-                signal: controller.signal
-            });
-            console.log(response.data);
-            isMounted && setUsers(response.data);
-        } catch (err) {
-       // navigate('/', { state: { from: location }, replace: true });
-        } finally{
-          setLoading(false);
-        }
-        
+      try {
+        const response = await axiosPrivate.get(USER_URL, {
+          signal: controller.signal
+        });
+        console.log(response.data);
+        isMounted && setUsers(response.data);
+      } catch (err) {
+        // navigate('/', { state: { from: location }, replace: true });
+      } finally {
+        setLoading(false);
+      }
+
     }
 
     getUsers();
 
     return () => {
-        isMounted = false;
-        controller.abort();
+      isMounted = false;
+      controller.abort();
     }
-}, [])
+  }, [])
 
   return (
     <>
-    {isLoading
-        ? <p>Loading users</p>
-        :  <div>
-        
-        <h2>Users page</h2>
-        
-    
-        <Grid>
-          <Paper elevation={12} className="paperStyle3">
-          {message && <Alert severity="info">{message}</Alert>}
+      {isLoading
+        ? <CircularProgress />
+        : <div className="min-h-full">
+          <header className="pb-3">
+            <div className="max-w-7xl mx-auto flex py-4 px-1  justify-between">
+              <h1 className="text-3xl font-bold text-gray-900">Users</h1>
+              <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/addUser')}>
+                Add 
+              </Button>
+            </div>
+          </header>
 
+          <Paper elevation={8} >
             {users?.length ? (
-             <div style={{ height: 500, width: '100%' }}>
-             <DataGrid
-               rows={users}
-               columns={columns}
-               pageSize={5}
-               rowsPerPageOptions={[5]}
-               onRowClick={handleRowClick} {...users}
-             />
-           </div>
+              <div style={{ height: 400, width: '100%' }} >
+                <DataGrid
+                  rows={users}
+                  columns={columns}
+                  pageSize={5}
+                  rowsPerPageOptions={[5]}
+                  loading={users ? false : true}
+                  onRowClick={handleRowClick} {...users}
+                />
+              </div>
             ) : (
               <p>No users available !</p>
             )}
-            <button onClick={() => refresh()}>Refresh</button>
           </Paper>
-        </Grid>
-      </div>}
-</>
-   
+
+        </div>}
+    </>
+
   );
 };
 

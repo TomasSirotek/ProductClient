@@ -1,28 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
-  color: #fff;
-}
-
-body {
-  min-height: 100vh;
-  background:#51557E;
-  /* background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
- background-blend-mode: multiply,multiply; */
-  /* background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); */
-  /* background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%); */
- 
-}
-
-.main{
+/* .main{
   position:absolute;
   top:0;
   left:0;
@@ -37,11 +34,11 @@ body {
   height: 80vh;
   width: 30%;
   margin: 60px auto;
-}
+} */
 
 /* Login */
 
-.main2{
+/* .main2{
   position:absolute;
   top:0;
   left:0;
@@ -79,4 +76,4 @@ body {
   margin-top:5%;
   font-size: 18px;
   text-align: center;
-}
+} */
