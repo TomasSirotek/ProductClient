@@ -3,16 +3,18 @@ import { useState, useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from '../../api/axios.js';
 import { DataGrid } from '@mui/x-data-grid';
 import useRefreshToken from "../../hooks/useRefreshToken";
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
+import AddIcon from '@mui/icons-material/Add';
 
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+
 
 const USER_URL = '/User';
 const Users = () => {
@@ -100,18 +102,21 @@ const Users = () => {
 
   return (
     <>
-      {isLoading
-        ? <CircularProgress />
-        : <div className="min-h-full">
-          <header className="pb-3">
-            <div className="max-w-7xl mx-auto flex py-4 px-1  justify-between">
-              <h1 className="text-3xl font-bold text-gray-900">Users</h1>
-              <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/addUser')}>
-                Add 
-              </Button>
-            </div>
-          </header>
-
+      <div className="min-h-full">
+        <header className="pb-3">
+          <div className="max-w-7xl mx-auto flex py-4 px-1  justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">Users</h1>
+            <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate('/addUser')}>
+              Add
+            </Button>
+          </div>
+        </header>
+        
+        {isLoading
+          ? <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+          :
           <Paper elevation={8} >
             {users?.length ? (
               <div style={{ height: 400, width: '100%' }} >
@@ -128,8 +133,9 @@ const Users = () => {
               <p>No users available !</p>
             )}
           </Paper>
+        }
+      </div>
 
-        </div>}
     </>
 
   );
