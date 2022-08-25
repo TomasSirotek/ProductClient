@@ -102,7 +102,7 @@ const handleChangeCheck = (event) => {
         setOpen(false);
     }
 
-    const deleteUser = async () => {
+    const deleteUser = async (id) => {
         try {
             const response = await axios.delete(`/User/${id}`)
                
