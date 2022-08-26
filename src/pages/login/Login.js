@@ -14,7 +14,7 @@ const Login = () => {
     const location = useLocation();
     const { setAuth } = useContext(AuthContext);
     // states 
-
+   //  const [user,setUser] = useState()
     const from = location.state?.from?.pathname || "/";
 
     const [email, setEmail] = useState('');
@@ -60,12 +60,15 @@ const Login = () => {
                 }
             );
             const token = response?.data?.token;
+            const refreshToken = response?.data?.refreshToken;
+            
             const roles = response?.data?.roles.map(x => x.name);
-            console.log('User is in roles  =>' + roles)
-            setAuth({ email, password, roles, token })
-
+           // console.log('User is in roles  =>' + roles)
+            setAuth({ email, password, roles, token,refreshToken })
+            console.log("here are roles " + roles)
             console.log(response?.data);
             console.log('This is jwt token=> ' + token);
+            console.log('This is refresh token=> ' + refreshToken);
 
             setSuccess(true);
             //clear state and controlled inputs

@@ -82,7 +82,7 @@ const Users = () => {
         const response = await axiosPrivate.get(USER_URL, {
           signal: controller.signal
         });
-        console.log(response.data);
+       // console.log(response.data);
         isMounted && setUsers(response.data);
       } catch (err) {
         // navigate('/', { state: { from: location }, replace: true });
@@ -102,6 +102,11 @@ const Users = () => {
 
   return (
     <>
+     {isLoading
+          ? <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+          :
       <div className="min-h-full">
         <header className="pb-3">
           <div className="max-w-7xl mx-auto flex py-4 px-1  justify-between">
@@ -112,11 +117,10 @@ const Users = () => {
           </div>
         </header>
         
-        {isLoading
-          ? <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-          </Box>
-          :
+        <div>
+                    <Button onClick={() => refresh()}>Refresh </Button>
+              </div>
+      
           <Paper elevation={8} >
             {users?.length ? (
               <div style={{ height: 400, width: '100%' }} >
@@ -129,12 +133,13 @@ const Users = () => {
                   onRowClick={handleRowClick} {...users}
                 />
               </div>
+              
             ) : (
               <p>No users available !</p>
             )}
           </Paper>
-        }
       </div>
+        }
 
     </>
 

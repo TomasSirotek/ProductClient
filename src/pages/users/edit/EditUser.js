@@ -44,7 +44,11 @@ const EditUser = () => {
     const [personName, setRole] = React.useState([]);
     const axiosPrivate = useAxiosPrivate();
   const [open, setOpen] = useState(false);
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('')
+
+  const handleChange2 = (event) => {
+    setFirstName(event.target.value);
+  };
 
   const from = location.state?.from?.pathname || "/users";
 
@@ -60,7 +64,7 @@ const EditUser = () => {
   };
 
   const initialValues = {
-    firstName: 'firstName',
+    firstName: user.firstName,
    
 };
 
@@ -126,6 +130,29 @@ const handleChangeCheck = (event) => {
     
       }
     
+      const updateUser = async () => {
+        try {
+            const response = await axios.put(`/User/${id}`)
+               
+            console.log("success");
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+                setOpen(true);
+            } else if (err.response?.status === 400) {
+                setErrMsg('Invalid Email or Password');
+                setOpen(true);
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+                setOpen(true);
+    
+            } else {
+                setErrMsg('Creation failed')
+                setOpen(true);
+            }
+        }
+    
+      }
 
     //test 
     const refresh = useRefreshToken();
@@ -138,10 +165,10 @@ const handleChangeCheck = (event) => {
 
         const getUser = async () => {
             try {
-                const response = await axiosPrivate.get(`/User/${id}`, {
+                const response = await axios.get(`/User/${id}`, {
                     signal: controller.signal
                 });
-                console.log(response.data);
+               // console.log(response.data);
                 isMounted && setUser(response.data);
             } catch (err) {
                 console.log(err);
@@ -177,7 +204,7 @@ const handleChangeCheck = (event) => {
       <header className="pb-3">
         <div className="max-w-7xl mx-auto flex py-4  justify-between">
           <h1 className="text-3xl font-bold text-gray-900">Edit User</h1>
-
+          <Button onClick={() => refresh()}>Refresh </Button>
           <Button
             variant="contained"
             startIcon={<ArrowBackIcon />}
@@ -222,8 +249,8 @@ const handleChangeCheck = (event) => {
                    
                     id="outlined-required"
                     name="firstName"
-                    value={user.firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                   // value={user.firstName}
+                    onChange={handleChange2}
                     margin="normal"
                   />
                   <TextField
@@ -288,7 +315,7 @@ const handleChangeCheck = (event) => {
                     type="submit"
                     variant="contained"
                     size = "large"
-        
+        onClick={() => updateUser()}
                     startIcon={<AddIcon />}
                     
                   >

@@ -3,18 +3,31 @@ import useAuth from './useAuth';
 
 const useRefreshToken = () => {
     const { setAuth } = useAuth();
+    const { auth } = useAuth();
 
+    const token = auth?.token;
+    // console.log("look here => " + token);
+    const refreshToken = auth?.refreshToken;
+//     // console.log(refreshToken)
+ const roles = auth?.roles;
+console.log("refresh roles state " + roles);
     const refresh = async () => {
-        const response = await axios.post('/Auth/refresh-token', {
+        const response = await axios.post('/Auth/refresh-token',
+        JSON.stringify({ token,refreshToken}),
+        {
+            headers: { 'Content-Type': 'application/json' },
             withCredentials: false
-        });
+        }
+    );
         setAuth(prev => {
-            console.log(JSON.stringify(prev));
-            console.log(response.data.token);
+            console.log("previous" + JSON.stringify(prev));
+            console.log(response.data);
+            console.log("response refresh roles" + response.data.roles)
             return { ...prev,
-                token: response.data.token}
+                roles: roles,
+                token: response.data}
         });
-        return response.data.token;
+        return response.data;
     }
     return refresh;
 };
